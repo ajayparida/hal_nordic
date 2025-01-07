@@ -1681,7 +1681,7 @@ void nrf_wifi_hal_deinit(struct nrf_wifi_hal_priv *hpriv)
 	nrf_wifi_osal_mem_free(hpriv);
 }
 
-
+#ifndef CONFIG_NRF71_ON_IPC
 enum nrf_wifi_status nrf_wifi_hal_otp_info_get(struct nrf_wifi_hal_dev_ctx *hal_dev_ctx,
 					       struct host_rpu_umac_info *otp_info,
 					       unsigned int *otp_flags)
@@ -1769,6 +1769,7 @@ enum nrf_wifi_status nrf_wifi_hal_otp_pack_info_get(struct nrf_wifi_hal_dev_ctx 
 out:
 	return status;
 }
+#endif /* !CONFIG_NRF71_ON_IPC */
 
 void nrf_wifi_hal_enable(struct nrf_wifi_hal_dev_ctx *hal_dev_ctx)
 {

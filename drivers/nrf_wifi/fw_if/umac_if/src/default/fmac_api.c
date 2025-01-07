@@ -341,7 +341,9 @@ enum nrf_wifi_status nrf_wifi_fmac_dev_init(struct nrf_wifi_fmac_dev_ctx *fmac_d
 					    unsigned char *country_code)
 {
 	enum nrf_wifi_status status = NRF_WIFI_STATUS_FAIL;
+#ifndef CONFIG_NRF71_ON_IPC
 	struct nrf_wifi_fmac_otp_info otp_info;
+#endif /* !CONFIG_NRF71_ON_IPC */
 	struct nrf_wifi_phy_rf_params phy_rf_params;
 
 	if (!fmac_dev_ctx) {
@@ -362,7 +364,7 @@ enum nrf_wifi_status nrf_wifi_fmac_dev_init(struct nrf_wifi_fmac_dev_ctx *fmac_d
 				      __func__);
 		goto out;
 	}
-
+#ifndef CONFIG_NRF71_ON_IPC
 	nrf_wifi_osal_mem_set(&otp_info,
 			      0xFF,
 			      sizeof(otp_info));
@@ -376,7 +378,7 @@ enum nrf_wifi_status nrf_wifi_fmac_dev_init(struct nrf_wifi_fmac_dev_ctx *fmac_d
 				      __func__);
 		goto out;
 	}
-
+#endif /* !CONFIG_NRF71_ON_IPC */
 	status = nrf_wifi_fmac_rf_params_get(fmac_dev_ctx,
 					     &phy_rf_params);
 	if (status != NRF_WIFI_STATUS_SUCCESS) {
